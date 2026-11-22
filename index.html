@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeautyCRM | Gestión del salón</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">B</div><div><strong>BeautyCRM</strong><small>Gestión del salón</small></div></div>
+      <div class="profile-mini"><div class="avatar" id="sideAvatar">A</div><div><strong id="sideName">Administración</strong><small id="sideRole">Propietaria</small></div></div>
+      <nav>
+        <button class="nav-link active" data-page="dashboard">▦ <span>Panel principal</span></button>
+        <button class="nav-link" data-page="services">✂ <span>Registrar servicio</span></button>
+        <button class="nav-link" data-page="team">♙ <span>Equipo y rendimiento</span></button>
+        <button class="nav-link" data-page="attendance">◷ <span>Asistencia</span></button>
+        <button class="nav-link owner-only" data-page="settings">⚙ <span>Meta y configuración</span></button>
+      </nav>
+      <div class="sidebar-bottom"><span class="live-dot"></span> Prototipo demostrativo <button id="resetBtn" class="reset-link">Restablecer demo</button></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow" id="todayLabel">RESUMEN DEL SALÓN</div><h1 id="pageTitle">Panel principal</h1></div>
+        <div class="top-actions"><span class="month-chip" id="monthChip"></span><select id="userSelect" aria-label="Cambiar usuario de demostración"></select></div>
+      </header>
+
+      <section id="dashboard" class="page active">
+        <div class="welcome-row"><div><h2 id="welcomeTitle">¡Buen día!</h2><p>Este es el resumen de actividad y objetivos del salón.</p></div><span class="status-pill">● Sistema de prueba</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span>Facturación del mes</span><strong id="revenueStat">Bs 0</strong><small>Servicios registrados</small></article>
+          <article class="stat-card"><span>Meta mensual</span><strong id="goalStat">Bs 20.000</strong><small id="goalRemaining">Restan Bs 20.000</small></article>
+          <article class="stat-card"><span>Servicios realizados</span><strong id="servicesStat">0</strong><small>En el mes actual</small></article>
+          <article class="stat-card"><span>Clientes atendidos</span><strong id="clientsStat">0</strong><small>Clientes únicos registrados</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel goal-panel">
+            <div class="panel-heading"><div><h3>Progreso de la meta mensual</h3><p>La dueña puede ajustar el objetivo según la etapa del negocio.</p></div><span class="tag" id="goalPercent">0%</span></div>
+            <div class="progress-track"><div id="goalBar" class="progress-fill"></div></div>
+            <div class="progress-labels"><strong id="goalCurrent">Bs 0</strong><span id="goalTotal">de Bs 20.000</span></div>
+            <div class="hint" id="goalMessage">Cada servicio registrado suma al avance del salón.</div>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><h3>Actividad de hoy</h3><p>Resumen de los registros de la jornada.</p></div></div>
+            <div class="today-list"><div><span class="bullet pink"></span><span>Servicios registrados hoy</span><strong id="todayServices">0</strong></div><div><span class="bullet gold"></span><span>Ingresos de hoy</span><strong id="todayRevenue">Bs 0</strong></div><div><span class="bullet green"></span><span>Trabajadores con asistencia</span><strong id="todayAttendance">0</strong></div></div>
+          </article>
+        </div>
+        <article class="panel ranking-panel">
+          <div class="panel-heading"><div><h3>Rendimiento del equipo</h3><p>Comparación por facturación generada durante el mes.</p></div><span class="subtle-label">TOP DEL MES</span></div>
+          <div id="rankingList" class="ranking-list"></div>
+        </article>
+      </section>
+
+      <section id="services" class="page">
+        <div class="section-intro"><div><h2>Registrar un servicio</h2><p>Registra cada atención para actualizar la facturación, el historial y las comisiones.</p></div></div>
+        <div class="form-layout">
+          <article class="panel form-panel">
+            <h3>Nuevo registro</h3>
+            <form id="serviceForm">
+              <label>Cliente<input id="clientName" required placeholder="Nombre del cliente"></label>
+              <div class="two-cols"><label>Servicio<select id="serviceType"></select></label><label>Trabajador<select id="workerSelect"></select></label></div>
+              <div class="two-cols"><label>Precio (Bs)<input id="servicePrice" type="number" min="1" step="0.5" required placeholder="0.00"></label><label>Comisión (%)<input id="commissionRate" type="number" min="0" max="100" step="1" value="10" required></label></div>
+              <label>Fecha<input id="serviceDate" type="date" required></label>
+              <div class="calculation"><span>Comisión estimada</span><strong id="commissionPreview">Bs 0,00</strong></div>
+              <button class="primary-btn" type="submit">+ Guardar servicio</button>
+            </form>
+          </article>
+          <article class="panel">
+            <div class="panel-heading"><div><h3>Últimos servicios</h3><p>Registros de demostración.</p></div></div>
+            <div id="recentServices" class="table-wrap"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="team" class="page">
+        <div class="section-intro"><div><h2>Equipo y rendimiento</h2><p>Consulta quién genera más ingresos, atiende más clientes y acumula más comisiones.</p></div></div>
+        <div id="teamCards" class="team-grid"></div>
+        <article class="panel"><div class="panel-heading"><div><h3>Detalle de productividad</h3><p>Los indicadores ayudan a reconocer distintos aportes, no solo la facturación.</p></div></div><div id="teamTable" class="table-wrap"></div></article>
+      </section>
+
+      <section id="attendance" class="page">
+        <div class="section-intro"><div><h2>Asistencia y horario</h2><p>Registra entrada y salida según el horario que establezca la administración.</p></div></div>
+        <div class="attendance-layout">
+          <article class="panel attendance-clock"><div class="clock-icon">◷</div><h3>Mi jornada</h3><p id="attendanceUser">Trabajador seleccionado</p><div class="clock-time" id="clockTime">--:--</div><div class="attendance-state" id="attendanceState">Sin registro de entrada</div><button id="checkInBtn" class="primary-btn">Registrar entrada</button><button id="checkOutBtn" class="secondary-btn" disabled>Registrar salida</button></article>
+          <article class="panel"><div class="panel-heading"><div><h3>Control de asistencia de hoy</h3><p>Vista general para administración.</p></div></div><div id="attendanceTable" class="table-wrap"></div></article>
+        </div>
+        <p class="note">La asistencia del prototipo es manual y demostrativa. En una versión real se pueden añadir reglas de tolerancia, turnos y permisos.</p>
+      </section>
+
+      <section id="settings" class="page">
+        <div class="section-intro"><div><h2>Meta y configuración</h2><p>Define un objetivo realista para cada mes y actualízalo cuando sea necesario.</p></div></div>
+        <div class="settings-grid">
+          <article class="panel form-panel"><h3>Meta mensual del salón</h3><form id="goalForm"><label>Objetivo de facturación (Bs)<input id="goalInput" type="number" min="1" step="100" required></label><button class="primary-btn">Guardar nueva meta</button></form><p class="note">Ejemplo: comenzar con Bs 20.000 y revisar el resultado antes de fijar la meta del siguiente mes.</p></article>
+          <article class="panel form-panel"><h3>Horario esperado</h3><form id="scheduleForm"><div class="two-cols"><label>Hora de entrada<input id="startTime" type="time" value="08:00"></label><label>Hora de salida<input id="endTime" type="time" value="18:00"></label></div><button class="primary-btn">Guardar horario</button></form><p class="note">El horario debe acordarse con el equipo y ajustarse a las condiciones laborales aplicables.</p></article>
+        </div>
+        <article class="panel"><h3>Reglas del prototipo</h3><ul class="rules"><li>La facturación suma el precio de cada servicio registrado.</li><li>La comisión se calcula con el porcentaje indicado en cada servicio.</li><li>La meta puede cambiarse sin borrar los registros del mes.</li><li>La dueña puede revisar el rendimiento individual y general.</li></ul></article>
+      </section>
+      <footer>BeautyCRM · Prototipo HTML, CSS y JavaScript · Datos guardados en este navegador</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

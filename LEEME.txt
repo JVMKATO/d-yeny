@@ -1,0 +1,29 @@
+BEAUTYCRM — PROTOTIPO FRONT-END
+================================
+
+Contenido:
+- index.html: estructura de las pantallas.
+- styles.css: diseño adaptable a computadora y celular.
+- app.js: lógica de demostración y almacenamiento local.
+
+Cómo ejecutarlo:
+1. Descomprime el archivo ZIP.
+2. Abre la carpeta beautycrm_prototipo.
+3. Haz doble clic en index.html o ábrelo con Chrome/Edge/Firefox.
+4. Usa el selector superior para cambiar entre la vista de la dueña y los perfiles de las trabajadoras.
+
+Qué incluye:
+- Panel general con facturación, meta mensual y progreso.
+- Meta mensual editable en bolivianos.
+- Registro de servicios, clientes, trabajadores y comisiones.
+- Rendimiento por trabajador: facturación, servicios, clientes y comisión.
+- Registro manual de entrada y salida.
+- Horario esperado configurable.
+- Datos de demostración y persistencia mediante localStorage.
+
+Importante:
+Este es un prototipo front-end. No tiene servidor, base de datos central,
+autenticación segura ni sincronización entre dispositivos. Los datos se guardan
+en el navegador del equipo donde se usa. Para producción se necesitará backend,
+base de datos, usuarios protegidos y respaldos. La facturación del prototipo
+representa los servicios registrados, no una integración tributaria oficial.
